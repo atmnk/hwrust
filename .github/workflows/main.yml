@@ -36,7 +36,6 @@ jobs:
       uses: mislav/bump-homebrew-formula-action@v1.6
       env:
         COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: "!contains(github.ref, '-')" # skip prereleases
       with:
         homebrew-tap: atmnk/homebrew-hwrust
