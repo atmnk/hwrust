@@ -1,0 +1,16 @@
+name: Homebrew
+on: [release]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update formula
+        uses: mislav/bump-homebrew-formula-action@v1.6
+        env:
+          COMMITTER_TOKEN: ${{ secrets.GH_TOKEN }}
+        if: github.event.action == 'published' && github.event.release.assets && !github.event.release.prerelease
+        with:
+          homebrew-tap: atmnk/homebrew-hwrust
+          formula-name: hwrust
+          download-url: ${{ github.event.release.assets[0].browser_download_url }}
+          commit-message: 'chore: upgrade {{formulaName}} formula to v{{version}}'
