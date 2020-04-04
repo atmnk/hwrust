@@ -16,15 +16,21 @@ jobs:
       with:
         command: build
         args: --release --all-features
-    - name: Create Tar
-      - with:
-          command: tar
-          args: -czvf hwrust.tar.gz target/release/hwrust
+    - uses: actions/checkout@master
+    - name: Compress action step
+      uses: master-atul/tar-action@v1.0.2
+      id: compress
+      with:
+        command: c
+        cwd: target/release
+        files: |
+          hwrust
+        outPath: hwrust.tar.gz
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: hwrust.tar.gz
+        file: target/release/hwrust.tar.gz
         asset_name: hwrust
         tag: ${{ github.ref }}
         overwrite: true
