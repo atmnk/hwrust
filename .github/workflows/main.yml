@@ -22,15 +22,14 @@ jobs:
       id: compress
       with:
         command: c
-        cwd: target/release
         files: |
-          hwrust
+          target/release/hwrust
         outPath: hwrust.tar.gz
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/release/hwrust.tar.gz
+        file: hwrust.tar.gz
         asset_name: hwrust
         tag: ${{ github.ref }}
         overwrite: true
