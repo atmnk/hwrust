@@ -41,5 +41,5 @@ jobs:
       with:
         homebrew-tap: atmnk/homebrew-hwrust
         formula-name: hwrust
-        download-url: 'https://github.com/atmnk/hwrust/releases/download/v{{version}}/hwrust.tar.gz'
+        download-url: 'https://github.com/atmnk/hwrust/releases/download/v0.0.14/hwrust.tar.gz'
         commit-message: 'chore: upgrade {{formulaName}} formula to v{{version}}'
