@@ -32,6 +32,9 @@ jobs:
         asset_name: hwrust.tar.gz
         tag: ${{ github.ref }}
         overwrite: true
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
     - name: Update formula
       uses: mislav/bump-homebrew-formula-action@v1.6
       env:
@@ -40,5 +43,5 @@ jobs:
       with:
         homebrew-tap: atmnk/homebrew-hwrust
         formula-name: hwrust
-        download-url: 'https://github.com/atmnk/hwrust/releases/download/v{{version}}/hwrust.tar.gz'
+        download-url:  ${{format('Hello {0} {1} {2}', 'https://github.com/atmnk/hwrust/releases/download/', steps.get_version.outputs.VERSION , '/hwrust.tar.gz')}}
         commit-message: 'chore: upgrade {{formulaName}} formula to v{{version}}'
