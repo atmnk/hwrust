@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Publish binaries
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -16,11 +16,15 @@ jobs:
       with:
         command: build
         args: --release --all-features
+    - name: Create Tar
+      - with:
+          command: tar
+          args: -czvf hwrust.tar.gz target/release/hwrust
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/release/hwrust
+        file: hwrust.tar.gz
         asset_name: hwrust
         tag: ${{ github.ref }}
         overwrite: true
