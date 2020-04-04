@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: hecrj/setup-rust-action@v1-release
+    - uses: actions/checkout@v2
+    - uses: actions-rs/cargo@v1
       with:
-        rust-version: stable
-    - uses: actions/checkout@v1
-    - name: Build
-      run: cargo build --release
+        command: build
+        args: --release --all-features
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
