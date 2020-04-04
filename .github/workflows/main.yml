@@ -38,7 +38,7 @@ jobs:
         formula-name: hwrust
         homebrew-tap: atmnk/hwrust
         base-branch: master
-        download-url: https://github.com/atmnk/hwrust/releases/download/v0.0.7/hwrust.tar.gz
+        download-url: "https://github.com/atmnk/hwrust/releases/download/v0.0.7/hwrust.tar.gz"
         commit-message: {{formulaName}} {{version}}
       env:
         COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}
