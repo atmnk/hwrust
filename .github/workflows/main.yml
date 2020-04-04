@@ -29,6 +29,16 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: hwrust.tar.gz
-        asset_name: hwrust
+        asset_name: hwrust.tar.gz
         tag: ${{ github.ref }}
         overwrite: true
+    - uses: mislav/bump-homebrew-formula-action@v1
+      if: "!contains(github.ref, '-')" # skip prereleases
+      with:
+        formula-name: hwrust
+        homebrew-tap: atmnk/hwrust
+        base-branch: master
+        download-url: https://github.com/atmnk/hwrust/releases/download/{{version}}/hwrust.tar.gz
+        commit-message: {{formulaName}} {{version}}
+      env:
+        COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}
